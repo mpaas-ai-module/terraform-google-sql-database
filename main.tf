@@ -106,3 +106,23 @@ resource "google_project_service_identity" "sa" {
   project  = var.project_id
   service  = "sqladmin.googleapis.com"
 }
+
+# --- Added from old repo (missing in new as of comparison) ---
+data "google_project" "sql_project" {
+  project_id = var.project_id
+}
+
+# --- Added from old repo (missing in new as of comparison) ---
+resource "google_project_iam_binding" "sql_kms_binding" {
+  count   = var.encryption_key_name != "" ? 1 : 0
+  project = var.project_id
+
+  lifecycle {
+    ignore_changes = [members]
+  }
+
+  role = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  members = [
+    "serviceAccount:service-${data.google_project.sql_project.number}@gcp-sa-cloud-sql.iam.gserviceaccount.com",
+  ]
+}

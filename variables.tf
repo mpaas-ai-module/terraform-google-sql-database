@@ -141,3 +141,9 @@ variable "point_in_time_recovery_enabled" {
 #   type = string
 
 # }
+
+# --- Added from old repo (missing in new as of comparison) ---
+variable "time_zone" {
+  type = string
+
+}
