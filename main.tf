@@ -114,7 +114,7 @@ data "google_project" "sql_project" {
 
 # --- Added from old repo (missing in new as of comparison) ---
 resource "google_project_iam_binding" "sql_kms_binding" {
-  count   = var.encryption_key_name != "" ? 1 : 0
+  count   = 1
   project = var.project_id
 
   lifecycle {
