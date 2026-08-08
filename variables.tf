@@ -100,10 +100,10 @@ variable "maintenance_window" {
   }))
 }
 
-variable "shared_vpc_project_id" {
-  description = "Shared VPC project"
-  type        = string
-}
+# variable "shared_vpc_project_id" {
+#   description = "Shared VPC project"
+#   type        = string
+# }
 
 variable "project_id" {
   description = "The project where the database lives"
@@ -146,4 +146,11 @@ variable "point_in_time_recovery_enabled" {
 variable "time_zone" {
   type = string
 
+}
+
+
+# --- Added from old repo (missing in new as of comparison) ---
+variable "shared_vpc_project_id" {
+  description = "Shared VPC project"
+  type        = string
 }
