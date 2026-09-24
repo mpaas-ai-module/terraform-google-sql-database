@@ -100,10 +100,10 @@ variable "maintenance_window" {
   }))
 }
 
-# variable "shared_vpc_project_id" {
-#   description = "Shared VPC project"
-#   type        = string
-# }
+variable "shared_vpc_project_id" {
+  description = "Shared VPC project"
+  type        = string
+}
 
 variable "project_id" {
   description = "The project where the database lives"
@@ -128,29 +128,17 @@ variable "host_project_id" {
   type        = string
 }
 
-variable "encryption_key_name" {
-  type        = string
-  description = "the Customer Managed Encryption Key used to encrypt the boot disk attached to each node in the node pool"
-  default     = ""
-}
 variable "point_in_time_recovery_enabled" {
   type    = bool
   default = false
 }
-# variable "time_zone" {
-#   type = string
-
-# }
-
-# --- Added from old repo (missing in new as of comparison) ---
 variable "time_zone" {
-  type = string
-
+  type        = string
+  description = "time zone for db"
 }
 
-
-# --- Added from old repo (missing in new as of comparison) ---
-variable "shared_vpc_project_id" {
-  description = "Shared VPC project"
+variable "edition" {
+  description = "Cloud SQL edition for PostgreSQL"
   type        = string
+  default     = "ENTERPRISE"
 }
