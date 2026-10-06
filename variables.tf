@@ -142,3 +142,8 @@ variable "edition" {
   type        = string
   default     = "ENTERPRISE"
 }
+
+variable "kms_key_self_link" {
+  description = "Name of the KMS key to be used for encryption."
+  type        = string
+}

@@ -24,16 +24,16 @@ data "google_project" "current" {
 # KMS - Auto Fetch
 # =========================================================
 
-data "google_kms_key_ring" "project_keyring" {
-  project  = var.project_id
-  name     = var.project_id
-  location = var.region
-}
+# data "google_kms_key_ring" "project_keyring" {
+#   project  = var.project_id
+#   name     = var.project_id
+#   location = var.region
+# }
 
-data "google_kms_crypto_key" "project_key" {
-  name     = "${data.google_project.current.name}-key"
-  key_ring = data.google_kms_key_ring.project_keyring.id
-}
+# data "google_kms_crypto_key" "project_key" {
+#   name     = "${data.google_project.current.name}-key"
+#   key_ring = data.google_kms_key_ring.project_keyring.id
+# }
 
 # =========================================================
 # Required APIs
@@ -163,7 +163,7 @@ data "google_compute_network" "sql_network" {
 # =========================================================
 
 resource "google_kms_crypto_key_iam_member" "sql_cmek" {
-  crypto_key_id = data.google_kms_crypto_key.project_key.id
+  crypto_key_id = var.kms_key_self_link
 
   role = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 
@@ -197,7 +197,7 @@ resource "google_sql_database_instance" "instance" {
 
   root_password = random_password.sql_password.result
 
-  encryption_key_name = data.google_kms_crypto_key.project_key.id
+  encryption_key_name = var.kms_key_self_link
 
   settings {
     tier              = var.tier
