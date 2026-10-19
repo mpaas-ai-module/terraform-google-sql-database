@@ -204,7 +204,7 @@ resource "google_sql_database_instance" "instance" {
     availability_type = var.availability_type
     disk_size         = var.disk_size
     disk_autoresize   = var.disk_autoresize
-    edition           = local.is_postgres ? var.edition : null
+    edition           = var.edition 
 
     time_zone = local.is_sql_server ? var.time_zone : null
 
